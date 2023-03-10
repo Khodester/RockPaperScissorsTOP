@@ -19,9 +19,40 @@
         // NEW function for game()
         // this one will play 5 rounds of game and keep track of rounds
         // winner displayed at end of 5 rounds
+        let playerScore = parseInt(0);
+        let computerScore = parseInt(0);
         function playRound(playerSelection, computerSelection){
-            
+            if (playerSelection === computerSelection) { 
+                console.log("Draw");
+            } else if (playerSelection == "rock" && computerSelection == "paper") {
+                computerScore += 1;
+                console.log("You lose, paper beats rock.");
+            } else if (playerSelection == "paper" && computerSelection == "scissors") {
+                computerScore += 1;
+                console.log("You lose, scissors beats paper.");
+            } else if (playerSelection == "scissors" && computerSelection == "rock"){
+                computerScore += 1;
+                console.log("You lose, rock beats scissors.");
+            } else if (playerSelection == "rock" && computerSelection == "scissors"){
+                playerScore += 1;
+                console.log("You win, rock beats scissors.");
+            } else if (playerSelection == "paper" && computerSelection == "rock"){
+                playerScore += 1;
+                console.log("You win, paper beats rock.");
+            } else if (playerSelection == "scissors" && computerSelection == "paper"){
+                playerScore += 1;
+                console.log("You win, scissors beats paper.");
+            } else {
+                console.log("Game broken. Something is wrong.");
+            }
+        }   
+    
+        function getPlayerChoice(choice){
+            choice = prompt("rock, paper or scissors?");
+            return choice;
         }
+
+        
         function getComputerChoice(){
             let randomNumber = Math.floor(Math.random() * 3);
             switch(randomNumber){
@@ -36,8 +67,25 @@
                 break
             }
         }
-        const computerSelection = getComputerChoice();
-        console.log(playRound(playerSelection, computerSelection));
+        
+        function game(){
+            for (i = 0; i < 5;) {
+                const playerSelection = getPlayerChoice().toLowerCase();
+                const computerSelection = getComputerChoice();
+                playRound(playerSelection, computerSelection);
+                console.log("YOU " + playerScore);
+                console.log("CPU " + computerScore);
+                i++;
+            }
+                if (playerScore > computerScore){
+                    console.log("You WIN!");
+                } else {
+                    console.log("You LOSE, CPU WINS!")
+                }
+        }
+        game();
+        
+
     </script>
 </body>
 </html>
